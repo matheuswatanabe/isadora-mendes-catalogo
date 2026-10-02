@@ -685,7 +685,8 @@ ul, ol { padding: 0; list-style: none; }
 .step h3::before {
   content: ""; position: absolute; top: 0; left: 0; width: 28px; height: 1px;
   background: var(--ink);
-  transition: width 0.9s var(--ease-out);
+  transform-origin: left;
+  transition: transform 0.9s var(--ease-out);
 }
 .step p { max-width: 32ch; color: var(--ink-2); }
 
@@ -702,7 +703,7 @@ ul, ol { padding: 0; list-style: none; }
   .step:hover { border-color: var(--ink-3); }
   .step:hover .step__frame { inset: 7px; border-color: rgba(27, 25, 22, 0.28); }
   .step:hover .step__gem::before { rotate: 135deg; inset: 6px; }
-  .step:hover h3::before { width: 56px; }
+  .step:hover h3::before { transform: scaleX(2); }
 }
 
 /* ---------- Dúvidas ---------- */
