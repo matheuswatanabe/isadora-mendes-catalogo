@@ -391,10 +391,6 @@ ul, ol { padding: 0; list-style: none; }
   scroll-snap-align: start;
   transition: color 0.3s var(--ease-out);
 }
-.filter sup {
-  font-size: 0.625rem; letter-spacing: 0.04em; font-variant-numeric: tabular-nums;
-  color: var(--ink-3); top: -0.2em; position: relative;
-}
 .filter::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
   background: var(--ink);
@@ -1060,15 +1056,44 @@ ul, ol { padding: 0; list-style: none; }
   .sheet__body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; overflow-y: auto; }
   .sheet__gallery { height: min(62dvh, 125vw); }
   .sheet__info { overflow: visible; padding-top: 28px; padding-bottom: 0; }
+  /* Barra de compra enxuta: uma linha só, com o WhatsApp e o link da peça em ícone */
   .sheet__actions {
     position: sticky; bottom: 0;
+    display: flex; align-items: center; gap: 8px;
     margin: 8px calc(clamp(24px, 4.5vw, 64px) * -1) 0;
-    padding: 12px clamp(24px, 4.5vw, 64px) calc(12px + env(safe-area-inset-bottom));
-    background: var(--paper);
+    padding: 10px clamp(24px, 4.5vw, 64px) calc(10px + env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--paper) 94%, transparent);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border-top: 1px solid var(--line);
-    justify-items: stretch;
   }
-  .sheet__actions .btn--quiet { justify-self: center; }
+  .sheet__actions .btn--ink {
+    --h: 46px; flex: 1; min-width: 0;
+    padding: 0 16px; gap: 10px;
+    font-size: 0.75rem; letter-spacing: 0.1em;
+  }
+  .sheet__actions .btn--ink svg { width: 16px; height: 16px; }
+  .sheet__actions .btn--quiet {
+    position: relative; flex: none;
+    --h: 46px; width: 46px; padding: 0;
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+  .sheet__actions .btn--quiet svg { width: 17px; height: 17px; }
+  .sheet__actions .btn--quiet span {
+    position: absolute; width: 1px; height: 1px; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  .sheet__actions .btn--quiet::after {
+    content: "Link copiado";
+    position: absolute; right: 0; bottom: calc(100% + 8px);
+    padding: 6px 10px;
+    background: var(--ink); color: var(--paper);
+    font-size: 0.6875rem; letter-spacing: 0.08em; white-space: nowrap;
+    opacity: 0; transform: translateY(4px); pointer-events: none;
+    transition: opacity 0.3s var(--ease-out), transform 0.4s var(--ease-out);
+  }
+  .sheet__actions .btn--quiet.is-copied::after { opacity: 1; transform: none; }
   .sheet__desc, .sheet__specs { order: 0; }
   .sheet__hint { order: 1; margin: 0 0 16px; }
   .sheet__actions { order: 2; }

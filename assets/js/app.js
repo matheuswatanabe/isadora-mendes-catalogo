@@ -92,7 +92,7 @@
       .map(function (c) {
         return (
           '<button class="filter" type="button" data-cat="' + esc(c.id) + '" aria-pressed="' +
-          (c.id === estado.cat) + '">' + esc(c.nome) + "<sup>" + c.n + "</sup></button>"
+          (c.id === estado.cat) + '">' + esc(c.nome) + "</button>"
         );
       })
       .join("");
@@ -427,7 +427,13 @@
   $("#peca-copiar").addEventListener("click", function () {
     var btn = this;
     var link = btn.dataset.link;
-    var ok = function () { $("span", btn).textContent = "Link copiado"; };
+    var ok = function () {
+      $("span", btn).textContent = "Link copiado";
+      // no celular o botão é só o ícone: um aviso curto aparece sobre ele
+      btn.classList.add("is-copied");
+      clearTimeout(btn._t);
+      btn._t = setTimeout(function () { btn.classList.remove("is-copied"); }, 1800);
+    };
     if (navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(link).then(ok, function () { prompt("Copie o link da peça:", link); });
     } else {
