@@ -168,6 +168,13 @@ ul, ol { padding: 0; list-style: none; }
   -webkit-backdrop-filter: none; backdrop-filter: none;
   border-bottom-color: rgba(243, 239, 232, 0.16);
 }
+/* Ao rolar ainda sobre a foto, o nome passaria por baixo da barra transparente:
+   ela ganha um fundo escuro, no tom da foto, para não misturar as letras */
+.topbar.is-over-hero.is-scrolled {
+  background: rgba(22, 18, 15, 0.9);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
 .topbar.is-over-hero .topbar__nav a,
 .topbar.is-over-hero .topbar__wa { color: rgba(243, 239, 232, 0.82); }
 .topbar.is-over-hero .topbar__nav a:hover,
@@ -478,7 +485,9 @@ ul, ol { padding: 0; list-style: none; }
 .sort__opt[aria-selected="true"]::after { opacity: 1; transform: none; }
 
 .catalog__meta {
-  position: relative; z-index: 21; /* a lista de ordenação abre por cima da grade */
+  /* acima da grade (a lista de ordenação abre por cima das peças),
+     mas abaixo da barra de filtros fixa, para passar por baixo dela ao rolar */
+  position: relative; z-index: 19;
   display: flex; justify-content: space-between; align-items: center; gap: 16px;
   padding: 10px 0 clamp(16px, 2.2vw, 28px);
 }
@@ -534,16 +543,31 @@ ul, ol { padding: 0; list-style: none; }
 .card__finish { font-size: 0.875rem; line-height: 1.4; color: var(--ink-3); }
 .card__price { font-size: 0.875rem; font-weight: 400; white-space: nowrap; margin-top: 2px; }
 
+/* Mesmo tratamento dos botões da galeria: círculo pequeno e translúcido,
+   com 44px de área de toque */
 .card__wa {
-  position: absolute; right: 10px; top: calc(125cqw - 54px); z-index: 2;
+  position: absolute; right: 4px; top: calc(125cqw - 48px); z-index: 2;
+  /* em pixel inteiro: em meio pixel, círculo e ícone arredondam para lados diferentes */
+  top: round(down, calc(125cqw - 48px), 1px);
   display: grid; place-items: center;
   width: 44px; height: 44px;
-  background: var(--paper); color: var(--ink);
-  border: 1px solid var(--line);
-  transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.3s var(--ease-out);
 }
-.card__wa svg { width: 20px; height: 20px; }
-.card__wa:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.card__wa::before {
+  content: ""; position: absolute; inset: 7px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--paper) 62%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: background-color 0.3s var(--ease-out), transform 0.4s var(--ease-out);
+}
+/* 16px (par) dentro dos 44px: o ícone fica a 14px exatos de cada lado, como o círculo */
+.card__wa svg { position: relative; width: 16px; height: 16px; }
+.card__wa:hover { color: var(--paper); }
+.card__wa:hover::before { background: var(--ink); transform: scale(1.06); }
+.card__wa:focus-visible { outline-offset: -4px; }
 
 .empty {
   display: grid; justify-items: start; gap: 16px;
@@ -597,22 +621,89 @@ ul, ol { padding: 0; list-style: none; }
 }
 .steps > .display { margin-bottom: clamp(32px, 4vw, 56px); }
 .steps__list {
+  --gap: clamp(28px, 3vw, 48px);
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(28px, 3vw, 48px);
-  counter-reset: none;
+  gap: var(--gap);
 }
-.steps__list li { position: relative; border-top: 1px solid var(--ink); padding-top: 22px; }
+
+/* Cada passo é um card de estojo: filete externo em `line` e uma moldura
+   interna em ink a 10px, como a borda dupla de um certificado de joia */
+.step {
+  position: relative;
+  display: flex; flex-direction: column;
+  padding: clamp(30px, 2.6vw, 44px) clamp(26px, 2.4vw, 40px) clamp(34px, 3vw, 48px);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  transition: border-color 0.6s var(--ease-out);
+}
+.step__frame {
+  position: absolute; inset: 10px;
+  border: 1px solid rgba(27, 25, 22, 0.14);
+  pointer-events: none;
+  transition: inset 0.7s var(--ease-out), border-color 0.7s var(--ease-out);
+}
+/* Cantos: pequenos esquadros em ink, como as cantoneiras de uma caixa */
+.step__frame::before,
+.step__frame::after {
+  content: ""; position: absolute; width: 14px; height: 14px;
+  border: 0 solid var(--ink);
+}
+.step__frame::before { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
+.step__frame::after { right: -1px; bottom: -1px; border-right-width: 1px; border-bottom-width: 1px; }
+
+.step__head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: clamp(36px, 3.6vw, 56px);
+}
+/* O ícone fica num engaste em losango, de filete fino */
+.step__gem {
+  position: relative;
+  display: grid; place-items: center;
+  width: 72px; aspect-ratio: 1;
+  margin: 6px 0 0 6px;
+}
+.step__gem::before {
+  content: ""; position: absolute; inset: 10px;
+  border: 1px solid var(--ink);
+  rotate: 45deg;
+  transition: rotate 0.9s var(--ease-out), inset 0.9s var(--ease-out);
+}
+.step__gem svg { position: relative; width: 28px; height: 28px; }
+
 .steps__n {
   display: block;
   font-family: var(--serif); font-weight: 400; font-variant-numeric: lining-nums;
-  font-size: clamp(3.5rem, 2.6rem + 3vw, 5.5rem); line-height: 0.85;
-  margin-bottom: 28px;
+  font-size: clamp(3rem, 2.4rem + 2vw, 4.5rem); line-height: 0.85;
+  letter-spacing: 0.02em;
+  color: var(--ink);
 }
-.steps__list h3 {
+.step h3 {
+  position: relative;
   font-size: 0.8125rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
-  margin-bottom: 10px;
+  padding-top: 18px; margin-bottom: 12px;
 }
-.steps__list p { max-width: 32ch; color: var(--ink-2); }
+.step h3::before {
+  content: ""; position: absolute; top: 0; left: 0; width: 28px; height: 1px;
+  background: var(--ink);
+  transition: width 0.9s var(--ease-out);
+}
+.step p { max-width: 32ch; color: var(--ink-2); }
+
+/* Brilho entre um card e o seguinte, centrado no vão */
+.step__joint {
+  position: absolute; z-index: 1;
+  top: 50%; left: calc(100% + var(--gap) / 2);
+  width: 20px; height: 20px;
+  translate: -50% -50%;
+  color: var(--ink-3);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .step:hover { border-color: var(--ink-3); }
+  .step:hover .step__frame { inset: 7px; border-color: rgba(27, 25, 22, 0.28); }
+  .step:hover .step__gem::before { rotate: 135deg; inset: 6px; }
+  .step:hover h3::before { width: 56px; }
+}
 
 /* ---------- Dúvidas ---------- */
 
@@ -742,15 +833,35 @@ ul, ol { padding: 0; list-style: none; }
   height: 100%;
 }
 
-.sheet__close {
-  position: absolute; top: 12px; right: 12px; z-index: 3;
+/* Fechar e setas da galeria: só um círculo pequeno e translúcido sob o ícone fino;
+   a área de toque continua com 44px */
+.sheet__close,
+.gallery__nav {
+  position: absolute; z-index: 3;
   display: grid; place-items: center;
-  width: 48px; height: 48px;
-  background: var(--paper); border: 0; cursor: pointer;
-  transition: background-color 0.3s var(--ease-out);
+  width: 44px; height: 44px; padding: 0;
+  background: none; border: 0; cursor: pointer;
+  color: var(--ink);
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.3s var(--ease-out);
 }
-.sheet__close svg { width: 22px; height: 22px; }
-.sheet__close:hover { background: var(--paper-2); }
+.sheet__close::before,
+.gallery__nav::before {
+  content: ""; position: absolute; inset: 6px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--paper) 62%, transparent);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: background-color 0.3s var(--ease-out), transform 0.4s var(--ease-out);
+}
+.sheet__close svg,
+.gallery__nav svg { position: relative; width: 16px; height: 16px; }
+.sheet__close:hover::before,
+.gallery__nav:hover::before { background: color-mix(in srgb, var(--paper) 90%, transparent); transform: scale(1.06); }
+.sheet__close:focus-visible,
+.gallery__nav:focus-visible { outline-offset: -4px; }
+
+.sheet__close { top: 10px; right: 10px; }
 
 .sheet__gallery { position: relative; min-height: 0; background: var(--paper-2); }
 .gallery__track {
@@ -787,19 +898,10 @@ ul, ol { padding: 0; list-style: none; }
   transform: scale(1.15);
 }
 .gallery__dots button:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
-.gallery__nav {
-  position: absolute; top: 50%; z-index: 2;
-  display: grid; place-items: center;
-  width: 44px; height: 44px; margin-top: -22px; padding: 0;
-  background: color-mix(in srgb, var(--paper) 88%, transparent);
-  color: var(--ink); border: 0; cursor: pointer;
-  transition: background-color 0.3s var(--ease-out), opacity 0.3s var(--ease-out);
-}
-.gallery__nav svg { width: 20px; height: 20px; }
-.gallery__nav--prev { left: 12px; }
+.gallery__nav { top: 50%; z-index: 2; margin-top: -22px; }
+.gallery__nav--prev { left: 6px; }
 .gallery__nav--prev svg { transform: scaleX(-1); }
-.gallery__nav--next { right: 12px; }
-.gallery__nav:hover { background: var(--paper); }
+.gallery__nav--next { right: 6px; }
 .gallery__nav:disabled { opacity: 0; pointer-events: none; }
 
 .sheet__info {
@@ -881,15 +983,19 @@ ul, ol { padding: 0; list-style: none; }
 .reveal [data-reveal="card"] { transform: translateY(28px); }
 .reveal [data-reveal="card"]:not(.is-in) .card__media img { transform: scale(1.08); }
 
-/* Como comprar: o fio de cima se desenha antes do texto */
-.reveal [data-reveal="step"] { border-top-color: transparent; }
-.reveal [data-reveal="step"]::before {
-  content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px;
-  background: var(--ink);
-  transform: scaleX(0); transform-origin: left;
-  transition: transform 1.4s var(--ease-out) var(--d, 0ms);
+/* Como comprar: o card sobe, a moldura interna se fecha sobre ele
+   e o engaste do ícone gira até assentar */
+/* (animação só com fill backwards: depois de assentar, o hover volta a valer) */
+.reveal [data-reveal="step"]:not(.is-in) .step__frame,
+.reveal [data-reveal="step"]:not(.is-in) .step__gem::before { opacity: 0; }
+.reveal [data-reveal="step"].is-in .step__frame {
+  animation: step-frame 1.6s var(--ease-out) calc(var(--d, 0ms) + 200ms) backwards;
 }
-.reveal [data-reveal="step"].is-in::before { transform: none; }
+.reveal [data-reveal="step"].is-in .step__gem::before {
+  animation: step-gem 1.6s var(--ease-out) calc(var(--d, 0ms) + 300ms) backwards;
+}
+@keyframes step-frame { from { inset: 22px; opacity: 0; } }
+@keyframes step-gem { from { rotate: -45deg; opacity: 0; } }
 
 /* ---------- Brilho nas estrelas do monograma ----------
    Dois raios cruzados na cor da própria marca acendem sobre cada estrela,
@@ -941,9 +1047,9 @@ ul, ol { padding: 0; list-style: none; }
   .about__img, .about__text { grid-column: 1; }
   .about__img { max-width: 560px; }
   .faq { grid-template-columns: 1fr; }
-  .steps__list { grid-template-columns: 1fr; }
-  .steps__list li { display: grid; grid-template-columns: 5rem 1fr; column-gap: 16px; }
-  .steps__n { grid-row: span 2; margin-bottom: 0; }
+  .steps__list { grid-template-columns: 1fr; max-width: 560px; }
+  .step__head { margin-bottom: 32px; }
+  .step__joint { top: calc(100% + var(--gap) / 2); left: 50%; }
 
   .sheet {
     width: 100vw; height: 100dvh; max-height: 100dvh;
@@ -1008,8 +1114,6 @@ ul, ol { padding: 0; list-style: none; }
   .lede { margin-bottom: 24px; }
 
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; row-gap: 40px; }
-  .card__wa { width: 40px; height: 40px; right: 8px; top: calc(125cqw - 48px); }
-  .card__wa svg { width: 18px; height: 18px; }
   .card__name { font-size: 0.75rem; }
   .card__finish, .card__price { font-size: 0.8125rem; }
 
