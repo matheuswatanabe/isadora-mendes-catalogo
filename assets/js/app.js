@@ -107,7 +107,8 @@
       if (o === "menor") return a.preco - b.preco;
       if (o === "maior") return b.preco - a.preco;
       if (o === "nome") return a.nome.localeCompare(b.nome, "pt-BR");
-      return (b.destaque ? 1 : 0) - (a.destaque ? 1 : 0) || a._ordem - b._ordem;
+      return (b.fundoClaro ? 1 : 0) - (a.fundoClaro ? 1 : 0) ||
+        (b.destaque ? 1 : 0) - (a.destaque ? 1 : 0) || a._ordem - b._ordem;
     });
     return l;
   }

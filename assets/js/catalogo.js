@@ -58,7 +58,9 @@ function f(nome) {
   - detalhes:   lista de pares [rótulo, valor] (material, medidas, variações...)
   - fotos:      lista de fotos; a 1ª é a principal, a 2ª aparece ao passar o mouse
   - alt:        descrição da 1ª foto para acessibilidade
-  - destaque:   true para aparecer primeiro em "Destaques"
+  - fundoClaro: true quando a 1ª foto tem fundo branco/claro; essas peças
+                vêm primeiro na ordem padrão ("Destaques")
+  - destaque:   true para aparecer logo depois, ainda na ordem padrão
   - disponivel: false mostra "Sob encomenda" em vez de esconder a peça
   - indicador:  "direita" põe as bolinhas da galeria no canto inferior direito
                 (use quando a peça, ou outra joia, ocupa o canto esquerdo das fotos)
@@ -136,6 +138,7 @@ window.IM_PECAS = [
     detalhes: [["Material", "Prata 925"], ["Comprimento", "45 cm, com regulagem"]],
     fotos: [f("colar-circulo-cravejado-1"), f("colar-circulo-cravejado-2")],
     alt: "Colar de prata com pingente em círculo cravejado de pedras, sobre fundo branco",
+    fundoClaro: true,
     destaque: false,
     disponivel: true,
   },
@@ -151,6 +154,7 @@ window.IM_PECAS = [
     detalhes: [["Material", "Prata 925"], ["Comprimento", "40 cm ou 45 cm"], ["Inicial", "À sua escolha"]],
     fotos: [f("colar-letter-1"), f("colar-letter-2")],
     alt: "Colar de prata com pingente da letra A cravejada, sobre fundo branco",
+    fundoClaro: true,
     destaque: false,
     disponivel: true,
   },
@@ -166,6 +170,7 @@ window.IM_PECAS = [
     detalhes: [["Material", "Aço inoxidável"], ["Comprimento", "45 cm, com regulagem"]],
     fotos: [f("colar-ponto-de-luz-1"), f("colar-ponto-de-luz-2")],
     alt: "Colar dourado de corrente fina com um único ponto de luz, sobre fundo branco",
+    fundoClaro: true,
     destaque: false,
     disponivel: true,
   },
@@ -181,6 +186,7 @@ window.IM_PECAS = [
     detalhes: [["Material", "Aço inoxidável"], ["Comprimento", "40 cm, com regulagem"]],
     fotos: [f("choker-discos-1"), f("choker-discos-2"), f("choker-discos-3")],
     alt: "Choker dourada de pequenos discos lisos, sobre fundo branco",
+    fundoClaro: true,
     destaque: false,
     disponivel: true,
   },
@@ -202,6 +208,7 @@ window.IM_PECAS = [
     detalhes: [["Material", "Prata 925"], ["Comprimento", "45 cm, com regulagem"]],
     fotos: [f("colar-tiff-1")],
     alt: "Colar de prata com dois pingentes de coração, um prateado e um azul-turquesa, sobre fundo branco",
+    fundoClaro: true,
     destaque: false,
     disponivel: true,
   },
@@ -217,6 +224,7 @@ window.IM_PECAS = [
     detalhes: [["Material", "Prata 925"], ["Comprimento", "18 cm, com regulagem"]],
     fotos: [f("pulseira-tiff-1")],
     alt: "Pulseira de prata de corrente fina com dois pingentes de coração, um prateado e um azul-turquesa",
+    fundoClaro: true,
     destaque: false,
     disponivel: true,
   },
@@ -232,6 +240,7 @@ window.IM_PECAS = [
     detalhes: [["Material", "Aço inoxidável"], ["Comprimento", "17 cm"], ["Fecho", "Em T"]],
     fotos: [f("pulseira-fecho-t-1"), f("pulseira-fecho-t-2"), f("pulseira-fecho-t-3")],
     alt: "Pulseira prateada de elos redondos com fecho em T e pingente de coração, sobre fundo branco",
+    fundoClaro: true,
     destaque: false,
     disponivel: true,
   },
@@ -247,6 +256,7 @@ window.IM_PECAS = [
     detalhes: [["Material", "Prata 925"], ["Tamanhos", "16, 17, 18, 19 e 22 cm"], ["Fecho", "Básico ou coração cravejado"]],
     fotos: [f("pulseira-berloques-1"), f("pulseira-berloques-2"), f("pulseira-berloques-3")],
     alt: "Pulseira de prata para berloques com fecho de coração cravejado, sobre fundo branco",
+    fundoClaro: true,
     destaque: false,
     disponivel: true,
   },
