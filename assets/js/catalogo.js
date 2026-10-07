@@ -3,7 +3,7 @@
    --------------------------------------------------------------------------
    Este é o ÚNICO arquivo que você precisa editar para mudar o catálogo.
 
-   1. Troque o número do WhatsApp em IM_CONFIG.whatsapp
+   1. O número do WhatsApp fica em IM_CONFIG.whatsapp
       (só números: 55 + DDD + número. Ex.: 5511987654321)
    2. Edite, adicione ou remova peças na lista IM_PECAS.
    3. Fotos ficam em assets/img/pecas/ (vertical 4:5, 1100 × 1375, até ~300 KB).
@@ -14,8 +14,8 @@
 window.IM_CONFIG = {
   marca: "Isadora Mendes Semijoias",
 
-  // Número do WhatsApp que recebe os pedidos (PLACEHOLDER, trocar)
-  whatsapp: "5500000000000",
+  // Número do WhatsApp que recebe os pedidos: +55 44 99919-4559
+  whatsapp: "5544999194559",
 
   // Mensagem enviada ao tocar em "Comprar pelo WhatsApp" numa peça.
   // {peca}, {codigo} e {preco} são preenchidos automaticamente.

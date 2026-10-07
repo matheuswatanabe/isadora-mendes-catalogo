@@ -18,17 +18,17 @@ site/
 └── LEIA-ME.md
 ```
 
-## 1. Antes de publicar: troque o WhatsApp
+## 1. WhatsApp de atendimento
 
-Abra `assets/js/catalogo.js` e altere:
+O número que recebe os pedidos é **+55 44 99919-4559**. Ele fica em `assets/js/catalogo.js`:
 
 ```js
-whatsapp: "5500000000000",
+whatsapp: "5544999194559",
 ```
 
-Use só números: 55 (Brasil) + DDD + número. Exemplo: `"5511987654321"`.
+Todos os botões do site usam esse número: topo, botão flutuante, "Perguntar no WhatsApp", rodapé e o "Comprar pelo WhatsApp" de cada peça. Para trocar, mude só essa linha, usando só números: 55 (Brasil) + DDD + número.
 
-Aproveite para ajustar o link do Instagram (`instagram:`) e as mensagens automáticas (`mensagemPeca` e `mensagemGeral`).
+Ali também dá para ajustar o link do Instagram (`instagram:`) e as mensagens automáticas (`mensagemPeca` e `mensagemGeral`).
 
 ## 2. Peças do catálogo
 

@@ -4,6 +4,18 @@
 
   document.documentElement.classList.add("js");
 
+  /* ---------- Recarregar sempre volta ao topo ---------- */
+
+  // O navegador não restaura a rolagem nem pula para âncoras (#sobre, #catalogo):
+  // a página abre do início e as entradas animam de novo. Link de peça (#peca/…) continua valendo.
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  if (location.hash && !/^#peca\//.test(location.hash)) {
+    history.replaceState(null, "", location.pathname + location.search);
+  }
+  function irAoTopo() { window.scrollTo({ top: 0, left: 0, behavior: "instant" }); }
+  irAoTopo();
+  window.addEventListener("load", irAoTopo);
+
   var CFG = window.IM_CONFIG || {};
   var CATS = window.IM_CATEGORIAS || [];
   var PECAS = (window.IM_PECAS || []).map(function (p, i) {
