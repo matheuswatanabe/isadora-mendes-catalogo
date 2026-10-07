@@ -259,6 +259,77 @@ window.IM_PECAS = [
   },
 
   /* ------------------------------------------------------------------------
+     Linha Tiff no banho (cadastrada em 06/10): os pingentes trazem gravação
+     de marca de terceiros, publicada assim por decisão da dona. Foto 2 da
+     Pulseira Tiff Pérolas: retocada para tirar o texto "COM LOGO AQUI" do
+     fornecedor. Fotos 1 das pulseiras: recortadas de prints de celular.
+     ------------------------------------------------------------------------ */
+  {
+    codigo: "CO-12",
+    nome: "Colar Tiff Banho de Prata",
+    categoria: "colares",
+    preco: 49.9,
+    precoPrazo: 59.9,
+    material: "Banho de prata",
+    descricao:
+      "Colar Tiff no banho de prata, com dois pingentes em formato de coração, um deles em azul-turquesa.\nRecebe acabamento com dupla camada de verniz, que dá mais durabilidade à peça.",
+    detalhes: [["Material", "Banho de prata"], ["Acabamento", "Dupla camada de verniz"], ["Comprimento", "45 cm, com regulagem"]],
+    fotos: [f("colar-tiff-banho-1"), f("colar-tiff-banho-2")],
+    alt: "Colar prateado de corrente fina com dois pingentes de coração, um prateado gravado e um azul-turquesa, sobre fundo branco",
+    fundoClaro: true,
+    destaque: false,
+    disponivel: true,
+  },
+  {
+    codigo: "CO-13",
+    nome: "Colar Tiff Flecha",
+    categoria: "colares",
+    preco: 59.9,
+    precoPrazo: 69.9,
+    material: "Banho de ouro ou prata",
+    descricao:
+      "Colar com pingente de coração atravessado por uma flecha, no banho de ouro ou de prata. Você escolhe a corrente: veneziana ou em elos.\nRecebe dupla camada de verniz, que dá mais durabilidade à peça.",
+    detalhes: [["Material", "Banho de ouro ou prata"], ["Acabamento", "Dupla camada de verniz"], ["Comprimento", "45 cm, com regulagem"], ["Cores", "Dourado ou prateado"], ["Corrente", "Veneziana ou elos"]],
+    fotos: [f("colar-tiff-flecha-1"), f("colar-tiff-flecha-2"), f("colar-tiff-flecha-3")],
+    alt: "Dois colares dourados com pingente de coração atravessado por uma flecha, um com corrente em elos e outro com corrente veneziana",
+    fundoClaro: true,
+    destaque: false,
+    disponivel: true,
+  },
+  {
+    codigo: "CO-14",
+    nome: "Colar Tiff Chave",
+    categoria: "colares",
+    preco: 69.9,
+    precoPrazo: 79.9,
+    material: "Banho de ouro ou prata",
+    descricao:
+      "Colar com pingente de coração e uma pequena chave, no banho de ouro ou de prata. Você escolhe a corrente: veneziana ou em elos.\nRecebe dupla camada de verniz, que dá mais durabilidade à peça.",
+    detalhes: [["Material", "Banho de ouro ou prata"], ["Acabamento", "Dupla camada de verniz"], ["Comprimento", "45 cm, com regulagem"], ["Cores", "Dourado ou prateado"], ["Corrente", "Veneziana ou elos"]],
+    fotos: [f("colar-tiff-chave-1"), f("colar-tiff-chave-2"), f("colar-tiff-chave-3"), f("colar-tiff-chave-4")],
+    alt: "Dois colares prateados com pingente de coração e chave, um com corrente em elos e outro com corrente veneziana",
+    fundoClaro: true,
+    destaque: false,
+    disponivel: true,
+  },
+  {
+    codigo: "BR-01",
+    nome: "Brincos Tiff",
+    categoria: "brincos",
+    preco: 59.9,
+    precoPrazo: 69.9,
+    material: "Banho de ouro ou prata",
+    descricao:
+      "Brincos de coração no banho de ouro ou de prata, com dupla camada de verniz, que dá mais durabilidade à peça.",
+    detalhes: [["Material", "Banho de ouro ou prata"], ["Acabamento", "Dupla camada de verniz"], ["Cores", "Dourado ou prateado"]],
+    fotos: [f("brincos-tiff-1"), f("brincos-tiff-2"), f("brincos-tiff-3")],
+    alt: "Par de brincos dourados em formato de coração com gravação, sobre fundo branco",
+    fundoClaro: true,
+    destaque: false,
+    disponivel: true,
+  },
+
+  /* ------------------------------------------------------------------------
      As fotos das 4 peças abaixo foram retocadas para tirar gravações de marca
      de terceiros (originais em /originais-com-marca, fora do site). Confira se
      a peça entregue corresponde à foto; o ideal é trocar por fotos próprias.
@@ -323,6 +394,37 @@ window.IM_PECAS = [
     detalhes: [["Material", "Prata 925"], ["Tamanhos", "16, 17, 18, 19 e 22 cm"], ["Fecho", "Básico ou coração cravejado"]],
     fotos: [f("pulseira-berloques-1"), f("pulseira-berloques-2"), f("pulseira-berloques-3")],
     alt: "Pulseira de prata para berloques com fecho de coração cravejado, sobre fundo branco",
+    fundoClaro: true,
+    destaque: false,
+    disponivel: true,
+  },
+  {
+    codigo: "PU-04",
+    nome: "Pulseira Tiff Flecha",
+    categoria: "pulseiras",
+    preco: 79.9,
+    precoPrazo: 89.9,
+    material: "Banho de ouro ou prata",
+    descricao:
+      "Pulseira com pingente de coração e flecha, no banho de ouro ou de prata, com regulagem.\nRecebe dupla camada de verniz, que dá mais durabilidade à peça.",
+    detalhes: [["Material", "Banho de ouro ou prata"], ["Acabamento", "Dupla camada de verniz"], ["Comprimento", "18 cm, com regulagem"], ["Cores", "Dourado ou prateado"]],
+    fotos: [f("pulseira-tiff-flecha-1"), f("pulseira-tiff-flecha-2"), f("pulseira-tiff-flecha-3"), f("pulseira-tiff-flecha-4")],
+    alt: "Duas pulseiras de corrente, uma prateada e uma dourada, com pingente de coração e flecha, usadas no pulso",
+    destaque: false,
+    disponivel: true,
+  },
+  {
+    codigo: "PU-05",
+    nome: "Pulseira Tiff Pérolas",
+    categoria: "pulseiras",
+    preco: 69.9,
+    precoPrazo: 79.9,
+    material: "Banho de ouro ou prata",
+    descricao:
+      "Pulseira de pérolas com pingente de coração, no banho de ouro ou de prata, com regulagem.\nRecebe dupla camada de verniz, que dá mais durabilidade à peça.",
+    detalhes: [["Material", "Banho de ouro ou prata"], ["Acabamento", "Dupla camada de verniz"], ["Comprimento", "18 cm, com regulagem"], ["Cores", "Dourado ou prateado"]],
+    fotos: [f("pulseira-tiff-perolas-1"), f("pulseira-tiff-perolas-2"), f("pulseira-tiff-perolas-3"), f("pulseira-tiff-perolas-4")],
+    alt: "Pulseira de pérolas com fecho e pingente de coração dourados, sobre fundo branco",
     fundoClaro: true,
     destaque: false,
     disponivel: true,
