@@ -41,6 +41,7 @@ As peças atuais vieram do formulário "Cadastro de peças – IM Semijoias". Pa
   categoria: "colares",            // conjuntos | colares | brincos | aneis | pulseiras
   preco: 239.9,                    // preço à vista; use ponto, não vírgula
   precoPrazo: 249.9,               // opcional: aparece como "ou R$ … a prazo"
+                                   // preco: null mostra "Valor a combinar" (peça personalizada)
   descricao: "Texto sobre a peça.",
   detalhes: [["Material", "Prata 925"], ["Comprimento", "45 cm"]],
   fotos: [f("colar-coracao-cravejado-1"), f("colar-coracao-cravejado-2")],

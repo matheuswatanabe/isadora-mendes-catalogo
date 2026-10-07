@@ -22,6 +22,10 @@ window.IM_CONFIG = {
   mensagemPeca:
     "Olá! Tenho interesse na peça {peca} ({codigo}), de {preco}. Ela está disponível?",
 
+  // Mesma mensagem, para peças sem preço fixo (preco: null, aparece "Valor a combinar")
+  mensagemPecaSemPreco:
+    "Olá! Tenho interesse na peça {peca} ({codigo}). Pode me passar um orçamento?",
+
   // Mensagem do botão geral de contato
   mensagemGeral: "Olá! Vim pelo catálogo da Isadora Mendes Semijoias e gostaria de atendimento.",
 
@@ -51,7 +55,7 @@ function f(nome) {
   - codigo:     referência curta (aparece no catálogo e na mensagem)
   - nome:       nome da peça
   - categoria:  um dos ids de IM_CATEGORIAS
-  - preco:      preço à vista, em reais (ex.: 189.9)
+  - preco:      preço à vista, em reais (ex.: 189.9); null mostra "Valor a combinar"
   - precoPrazo: preço a prazo (opcional; aparece no detalhe da peça)
   - material:   linha curta abaixo do nome no catálogo (ex.: "Prata 925")
   - descricao:  texto sobre a peça (quebras de linha com \n)
@@ -190,6 +194,69 @@ window.IM_PECAS = [
     destaque: false,
     disponivel: true,
   },
+  {
+    codigo: "CO-08",
+    nome: "Gargantilha Infinito",
+    categoria: "colares",
+    preco: 149.9,
+    precoPrazo: 159.9,
+    material: "Prata 925",
+    descricao:
+      "A Gargantilha Infinito em Prata 925 traz uma corrente delicada com um pingente em forma de símbolo do infinito, todo cravejado de pedras brilhantes.",
+    detalhes: [["Material", "Prata 925"], ["Comprimento", "40 cm ou 45 cm"]],
+    fotos: [f("gargantilha-infinito-1"), f("gargantilha-infinito-2")],
+    alt: "Gargantilha de prata com pingente de infinito cravejado, sobre fundo branco",
+    fundoClaro: true,
+    destaque: false,
+    disponivel: true,
+  },
+  {
+    codigo: "CO-09",
+    nome: "Colar Ponto de Luz G",
+    categoria: "colares",
+    preco: 59.9,
+    precoPrazo: 69.9,
+    material: "Banho de ouro ou prata",
+    descricao:
+      "Colar com corrente em elos e um ponto de luz grande, no banho de ouro ou de prata.\nA peça recebe duas camadas de verniz, que dão mais durabilidade.",
+    detalhes: [["Material", "Banho de ouro ou prata"], ["Acabamento", "Dupla camada de verniz"], ["Comprimento", "40 cm, com extensor"], ["Cores", "Dourado ou prateado"]],
+    fotos: [f("colar-ponto-de-luz-g-1"), f("colar-ponto-de-luz-g-2"), f("colar-ponto-de-luz-g-3")],
+    alt: "Colar dourado de corrente fina com um ponto de luz grande, sobre fundo branco",
+    fundoClaro: true,
+    destaque: false,
+    disponivel: true,
+  },
+  {
+    codigo: "CO-10",
+    nome: "Colar Letra Moissanite",
+    categoria: "colares",
+    preco: 369.9,
+    precoPrazo: 379.9,
+    material: "Prata 925 e moissanite",
+    descricao:
+      "Colar em Prata 925 com a inicial cravejada em moissanite, de um brilho impossível de passar despercebido. Acompanha certificado.\nÉ uma peça personalizada: a produção leva de 20 a 30 dias.",
+    detalhes: [["Material", "Prata 925"], ["Pedras", "Moissanite"], ["Comprimento", "40 cm, com extensor"], ["Inicial", "À sua escolha"], ["Produção", "20 a 30 dias"]],
+    fotos: [f("colar-letra-moissanite-1")],
+    alt: "Colar de prata com a letra M cursiva cravejada, sobre fundo branco",
+    fundoClaro: true,
+    destaque: false,
+    disponivel: false, // feito sob encomenda
+  },
+  {
+    codigo: "CO-11",
+    nome: "Colar Nome Moissanite",
+    categoria: "colares",
+    preco: null, // valor a combinar: depende do nome
+    material: "Prata 925 e moissanite",
+    descricao:
+      "Colar em Prata 925 com o nome que você escolher, cravejado em moissanite: um brilho impossível de passar despercebido. Acompanha certificado.\nO valor é calculado a partir do nome, e a produção leva em média de 20 a 30 dias.",
+    detalhes: [["Material", "Prata 925"], ["Pedras", "Moissanite"], ["Comprimento", "40 cm, com extensor"], ["Nome", "À sua escolha"], ["Produção", "20 a 30 dias"]],
+    fotos: [f("colar-nome-moissanite-1")],
+    alt: "Colar de prata com o nome Jenifer em letra cursiva cravejada, sobre fundo branco",
+    fundoClaro: true,
+    destaque: false,
+    disponivel: false, // feito sob encomenda
+  },
 
   /* ------------------------------------------------------------------------
      As fotos das 4 peças abaixo foram retocadas para tirar gravações de marca
@@ -256,6 +323,72 @@ window.IM_PECAS = [
     detalhes: [["Material", "Prata 925"], ["Tamanhos", "16, 17, 18, 19 e 22 cm"], ["Fecho", "Básico ou coração cravejado"]],
     fotos: [f("pulseira-berloques-1"), f("pulseira-berloques-2"), f("pulseira-berloques-3")],
     alt: "Pulseira de prata para berloques com fecho de coração cravejado, sobre fundo branco",
+    fundoClaro: true,
+    destaque: false,
+    disponivel: true,
+  },
+
+  /* ---------------------------------- Anéis --------------------------------- */
+  {
+    codigo: "AN-01",
+    nome: "Anel Infinito",
+    categoria: "aneis",
+    preco: 59.9,
+    precoPrazo: 69.9,
+    material: "Prata 925",
+    descricao:
+      "Anel em Prata 925 lisa, com o símbolo do infinito na parte superior. Uma peça delicada e minimalista.",
+    detalhes: [["Material", "Prata 925"], ["Tamanhos", "Consulte pelo WhatsApp"]],
+    fotos: [f("anel-infinito-1"), f("anel-infinito-2")],
+    alt: "Anel de prata liso com o símbolo do infinito, sobre fundo branco",
+    fundoClaro: true,
+    destaque: false,
+    disponivel: true,
+  },
+  {
+    codigo: "AN-02",
+    nome: "Anel Rosa",
+    categoria: "aneis",
+    preco: 89.9,
+    precoPrazo: 99.9,
+    material: "Prata 925",
+    descricao:
+      "Anel solitário em Prata 925 com uma flor de rosa cravejada: no centro, um ponto de luz vermelho, cercado pelas pétalas com pedras e por ramos que seguem pelo aro.",
+    detalhes: [["Material", "Prata 925"], ["Pedra central", "Vermelha"], ["Tamanhos", "Consulte pelo WhatsApp"]],
+    fotos: [f("anel-rosa-1"), f("anel-rosa-2")],
+    alt: "Anel de prata com flor de rosa cravejada e pedra vermelha no centro, sobre fundo branco",
+    fundoClaro: true,
+    destaque: false,
+    disponivel: true,
+  },
+  {
+    codigo: "AN-03",
+    nome: "Anel You & Me",
+    categoria: "aneis",
+    preco: 119.9,
+    precoPrazo: 129.9,
+    material: "Prata 925",
+    descricao:
+      "Anel solitário em Prata 925 com uma pedra pink em formato de coração no centro, presa por quatro garras, e duas pedras menores, uma de cada lado.\nNa lateral, a frase “you & me” gravada. O aro tem 2 mm de espessura.",
+    detalhes: [["Material", "Prata 925"], ["Pedra", "Coração pink"], ["Espessura", "2 mm"], ["Tamanhos", "Consulte pelo WhatsApp"]],
+    fotos: [f("anel-you-me-1")],
+    alt: "Anel de prata com pedra pink em formato de coração e a frase you & me gravada na lateral, sobre fundo branco",
+    fundoClaro: true,
+    destaque: false,
+    disponivel: true,
+  },
+  {
+    codigo: "AN-04",
+    nome: "Anel Tiff",
+    categoria: "aneis",
+    preco: 129.9,
+    precoPrazo: 139.9,
+    material: "Prata 925",
+    descricao:
+      "Anel em Prata 925 com aro cravejado de 2 mm de espessura e um pingente de coração resinado em azul-turquesa, de 7,7 mm.\nFeito com material de excelente qualidade e durabilidade.",
+    detalhes: [["Material", "Prata 925"], ["Espessura", "2 mm"], ["Pingente", "Coração resinado, 7,7 mm"], ["Tamanhos", "Consulte pelo WhatsApp"]],
+    fotos: [f("anel-tiff-1"), f("anel-tiff-2")],
+    alt: "Anel de prata com aro cravejado e pingente de coração azul-turquesa, sobre fundo branco",
     fundoClaro: true,
     destaque: false,
     disponivel: true,

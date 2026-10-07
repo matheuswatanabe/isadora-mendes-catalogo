@@ -15,7 +15,9 @@
   var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
 
   var brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
-  function preco(v) { return brl.format(v).replace(/ /g, " "); }
+  function preco(v) {
+    if (v == null) return "Valor a combinar"; // peça sem preço fixo (ex.: personalizada)
+    return brl.format(v).replace(/ /g, " "); }
 
   function img(url, w, h) {
     if (url.indexOf("images.unsplash.com") === -1) return url;
@@ -36,7 +38,8 @@
   }
 
   function waPeca(p) {
-    var msg = (CFG.mensagemPeca || "Olá! Tenho interesse na peça {peca} ({codigo}).")
+    var modelo = p.preco == null ? CFG.mensagemPecaSemPreco : CFG.mensagemPeca;
+    var msg = (modelo ||"Olá! Tenho interesse na peça {peca} ({codigo}).")
       .replace("{peca}", p.nome)
       .replace("{codigo}", p.codigo)
       .replace("{preco}", preco(p.preco));
@@ -104,6 +107,8 @@
     });
     var o = estado.ordem;
     l.sort(function (a, b) {
+      if ((o === "menor" || o === "maior") && (a.preco == null || b.preco == null))
+        return (a.preco == null) - (b.preco == null); // sem preço vai para o fim
       if (o === "menor") return a.preco - b.preco;
       if (o === "maior") return b.preco - a.preco;
       if (o === "nome") return a.nome.localeCompare(b.nome, "pt-BR");
