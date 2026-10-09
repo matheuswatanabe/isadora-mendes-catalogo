@@ -389,7 +389,8 @@
     }
     $(".sheet__info", sheet).scrollTop = 0;
     $(".sheet__body", sheet).scrollTop = 0;
-    $(".sheet__close", sheet).focus({ preventScroll: true });
+    // foco no próprio diálogo, sem anel visível ao abrir; o Tab leva ao botão de fechar
+    sheet.focus({ preventScroll: true });
 
     var alvo = "#peca/" + encodeURIComponent(p.codigo);
     if (!viaHash && location.hash !== alvo) history.pushState({ peca: p.codigo }, "", alvo);

@@ -375,8 +375,11 @@ ul, ol { padding: 0; list-style: none; }
 
 .filters {
   display: flex; gap: clamp(20px, 2.6vw, 36px);
-  overflow-x: auto; scrollbar-width: none;
+  /* só rola na horizontal: o sublinhado em bottom: -1px criava 1px de rolagem
+     vertical e a faixa balançava para cima e para baixo ao arrastar */
+  overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
   scroll-snap-type: x proximity;
 }
 .filters::-webkit-scrollbar { display: none; }
@@ -392,7 +395,7 @@ ul, ol { padding: 0; list-style: none; }
   transition: color 0.3s var(--ease-out);
 }
 .filter::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
   background: var(--ink);
   transform: scaleX(0); transform-origin: left;
   transition: transform 0.5s var(--ease-out);
@@ -855,8 +858,12 @@ ul, ol { padding: 0; list-style: none; }
 .gallery__nav svg { position: relative; width: 16px; height: 16px; }
 .sheet__close:hover::before,
 .gallery__nav:hover::before { background: color-mix(in srgb, var(--paper) 90%, transparent); transform: scale(1.06); }
+/* foco pelo teclado: anel redondo no próprio círculo, nunca um retângulo */
 .sheet__close:focus-visible,
-.gallery__nav:focus-visible { outline-offset: -4px; }
+.gallery__nav:focus-visible { outline: none; }
+.sheet__close:focus-visible::before,
+.gallery__nav:focus-visible::before { box-shadow: 0 0 0 1.5px var(--ink); }
+.sheet:focus { outline: none; }
 
 .sheet__close { top: 10px; right: 10px; }
 
@@ -1056,26 +1063,33 @@ ul, ol { padding: 0; list-style: none; }
   .sheet__body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; overflow-y: auto; }
   .sheet__gallery { height: min(62dvh, 125vw); }
   .sheet__info { overflow: visible; padding-top: 28px; padding-bottom: 0; }
-  /* Barra de compra enxuta: uma linha só, com o WhatsApp e o link da peça em ícone */
+  /* Barra de compra: uma linha só, com o WhatsApp e o link da peça em ícone.
+     Fica afastada da borda de baixo (fora da zona da barra de gestos/navegador),
+     com botão alto o bastante para o polegar, e o texto some num degradê por trás
+     em vez de ser cortado por uma linha dura. */
+  .sheet__info { --pad-x: clamp(28px, 5vw, 72px); }
   .sheet__actions {
-    position: sticky; bottom: 0;
-    display: flex; align-items: center; gap: 8px;
-    margin: 8px calc(clamp(24px, 4.5vw, 64px) * -1) 0;
-    padding: 10px clamp(24px, 4.5vw, 64px) calc(10px + env(safe-area-inset-bottom));
-    background: color-mix(in srgb, var(--paper) 94%, transparent);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid var(--line);
+    position: sticky; bottom: 0; z-index: 2;
+    display: flex; align-items: center; gap: 10px;
+    margin: 8px calc(var(--pad-x) * -1) 0;
+    padding: 14px var(--pad-x) max(22px, calc(env(safe-area-inset-bottom) + 12px));
+    background: var(--paper);
+  }
+  .sheet__actions::before {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 100%;
+    height: 28px; pointer-events: none;
+    background: linear-gradient(to bottom, color-mix(in srgb, var(--paper) 0%, transparent), var(--paper));
   }
   .sheet__actions .btn--ink {
-    --h: 46px; flex: 1; min-width: 0;
+    --h: 54px; flex: 1; min-width: 0;
     padding: 0 16px; gap: 10px;
     font-size: 0.75rem; letter-spacing: 0.1em;
+    box-shadow: 0 8px 22px -10px rgba(27, 25, 22, 0.45);
   }
-  .sheet__actions .btn--ink svg { width: 16px; height: 16px; }
+  .sheet__actions .btn--ink svg { width: 18px; height: 18px; }
   .sheet__actions .btn--quiet {
     position: relative; flex: none;
-    --h: 46px; width: 46px; padding: 0;
+    --h: 54px; width: 54px; padding: 0;
     border: 1px solid var(--line);
     color: var(--ink);
   }
